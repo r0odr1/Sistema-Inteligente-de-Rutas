@@ -2,3 +2,7 @@
 # incluidos en la biblioteca estándar de Python.
 #
 # No requiere dependencias externas.
+
+pandas
+scikit-learn
+matplotlib
