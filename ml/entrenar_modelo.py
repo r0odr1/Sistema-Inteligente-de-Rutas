@@ -38,7 +38,8 @@ columnas_entrada = [
     "numero_transbordos",
     "nivel_congestion",
     "tiempo_estimado_min",
-    "costo_estimado"
+    "costo_estimado",
+    "hora_pico"
 ]
 
 X = datos[columnas_entrada]
@@ -196,6 +197,49 @@ plt.tight_layout()
 
 plt.savefig(
     "graficas/matriz_confusion.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
+plt.show()
+
+# --------------------------------------------------
+# 10. GRÁFICA DE RUTAS SEGÚN HORA PICO
+# --------------------------------------------------
+
+resumen_hora_pico = (
+    datos.groupby("hora_pico")["ruta_recomendada"]
+    .value_counts()
+    .unstack(fill_value=0)
+    .reindex(index=[0, 1], columns=[0, 1], fill_value=0)
+)
+
+resumen_hora_pico.index = [
+    "Fuera de hora pico",
+    "Hora pico"
+]
+
+resumen_hora_pico.columns = [
+    "No recomendada",
+    "Recomendada"
+]
+
+ax = resumen_hora_pico.plot(
+    kind="bar",
+    figsize=(10, 6)
+)
+
+plt.title(
+    "Rutas recomendadas y no recomendadas según hora pico"
+)
+plt.xlabel("Periodo")
+plt.ylabel("Cantidad de rutas")
+plt.xticks(rotation=0)
+plt.legend(title="Clasificación")
+plt.tight_layout()
+
+plt.savefig(
+    "graficas/rutas_hora_pico.png",
     dpi=300,
     bbox_inches="tight"
 )

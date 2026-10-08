@@ -15,7 +15,8 @@ X = datos[
         "numero_transbordos",
         "nivel_congestion",
         "tiempo_estimado_min",
-        "costo_estimado"
+        "costo_estimado",
+        "hora_pico"
     ]
 ]
 
@@ -38,7 +39,8 @@ nueva_ruta = pd.DataFrame(
             "numero_transbordos": 1,
             "nivel_congestion": 2,
             "tiempo_estimado_min": 33,
-            "costo_estimado": 24
+            "costo_estimado": 24,
+            "hora_pico": 1
         }
     ]
 )
