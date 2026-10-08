@@ -2,7 +2,10 @@
 # incluidos en la biblioteca estándar de Python.
 #
 # No requiere dependencias externas.
+# Dependencias del componente de aprendizaje supervisado.
+# El sistema original A* utiliza la biblioteca estándar.
 
 pandas
 scikit-learn
 matplotlib
+joblib
