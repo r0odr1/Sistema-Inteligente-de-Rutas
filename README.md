@@ -496,3 +496,60 @@ finalizaron satisfactoriamente.
 Los resultados respaldan el funcionamiento del
 prototipo académico dentro de las condiciones
 y limitaciones establecidas.
+## Aprendizaje no supervisado: agrupamiento de rutas con K-Means
+
+### Objetivo
+
+Aplicar aprendizaje no supervisado para agrupar rutas con características similares, sin utilizar la variable `ruta_recomendada` como objetivo de entrenamiento.
+
+### Variables utilizadas
+
+El algoritmo utiliza las siguientes siete variables:
+
+- `distancia_km`: distancia de la ruta.
+- `numero_estaciones`: número de estaciones.
+- `numero_transbordos`: número de transbordos.
+- `nivel_congestion`: nivel de congestión.
+- `tiempo_estimado_min`: tiempo estimado.
+- `costo_estimado`: coste estimado.
+- `hora_pico`: indicador de hora punta.
+
+### Metodología
+
+1. Cargar los datos del conjunto de rutas.
+2. Comprobar que existen las columnas necesarias y que no hay valores nulos.
+3. Estandarizar las variables mediante `StandardScaler`.
+4. Evaluar distintos valores de K, desde 2 hasta 6.
+5. Analizar la inercia mediante el método del codo y la puntuación de silueta.
+6. Aplicar K-Means con `K=2` y `random_state=42`.
+7. Representar los grupos en dos dimensiones mediante PCA.
+8. Guardar las etiquetas de agrupamiento en `datos/rutas_agrupadas.csv`.
+
+### Resultados
+
+La configuración seleccionada utiliza dos clusters. En las pruebas realizadas, K=2 obtuvo una puntuación de silueta de aproximadamente 0,4054.
+
+Los grupos se diferencian principalmente por la distancia, el número de estaciones, los transbordos, el tiempo estimado y el coste. Estos resultados permiten explorar patrones en los datos, pero no representan categorías oficiales del transporte real.
+
+### Ejecución
+
+Para ejecutar el agrupamiento:
+
+```bash
+python ml/agrupar_rutas.py
+```
+
+### Pruebas
+
+Para ejecutar las pruebas específicas del aprendizaje no supervisado:
+
+```bash
+python -m pytest tests/test_agrupamiento.py -v
+```
+
+Las ocho pruebas implementadas finalizaron correctamente en la última ejecución.
+
+### Documentación adicional
+
+- `docs/descripcion_aprendizaje_no_supervisado.pdf`: descripción de la metodología y del algoritmo.
+- `docs/pruebas_aprendizaje_no_supervisado.pdf`: descripción de las pruebas realizadas.
